@@ -1,11 +1,33 @@
-import React from "react";
-import ReactDom from "react-dom";
+import React from 'react'
+import ReactDOM from 'react-dom'
+import {Form} from './components'
 
-const App = () => {
-  return (
+
+ const App = ()=> {
+  
+  return  (
     <div>
-      <h1>Hello!</h1>
-    </div> );
-};
+  <Form /> 
 
-ReactDom.render(<App />, document.getElementById("app"));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+    )
+}
+
+
+
+ReactDOM.render(<App />, document.getElementById('app'))
