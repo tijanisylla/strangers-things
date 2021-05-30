@@ -1,30 +1,27 @@
-import React from 'react'
+import React from "react";
 
- const Form = () => {
-    return (
-        <div>
+const Form = () => {
+  return (
+    <>
+    {/* Show the log-in screen on landing page, have a button at the bottom available to move to registration */}
+      <form id="log-in">
 
-          
-            <form>
-           
-           <label for="username">Username:</label>
+        <label htmlFor="username">Username:</label>
+        <input type="text" placeholder="user-name" minLength={4} required/>
 
-                <input type="text"  placeholder="user-name" required/>
+        <label htmlFor="password">Password:</label>
+        <input type="password" placeholder="password" minLength={8} required/>
+              
+        <button onClick={() => {
+          // log-in button
+        }}>Log-In</button>
 
-                <label for="password">password:</label>
+        <button onClick={() => {
+          // register button
+        }}>Register</button>
 
-                <input type="password" placeholder="password" required/>
+      </form>
+    </> );
+};
 
-
-                <label for="password">confirm-password:</label>
-                <input type="password" placeholder="confirm-password" required/>
-
-                
-                <input type="submit"/>
-            </form>
-        </div>
-    )
-}
-
-
-export default Form 
+export default Form;
