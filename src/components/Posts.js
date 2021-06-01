@@ -1,5 +1,5 @@
-import React, {useState} from "react";
-
+import React, {useState} from "react"
+import './style/Post.css'
 const Posts = () => {
     const [posts, setPosts] = useState([]);
     
