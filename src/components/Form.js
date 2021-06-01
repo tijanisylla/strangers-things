@@ -1,60 +1,75 @@
-import React from "react";
+import React, {useState} from "react";
+
 
 const Form = () => {
   return (
     <>
-
-
-
-    {/* Show the log-in screen on landing page, have a button at the bottom available to move to registration */}
-      <form id="log-in"  onSubmit={(e) => {
-          // register button
-          // <h3>{}</h3>
-          e.preventDefault()
-          console.log(e.target[0].value)
-          const userName = e.target[0].value
-          const passWord = e.target[1].value
+      <form id="register"  onSubmit={ async (event) => {
+          event.preventDefault()
+          const name = event.target[0].value
+          const pass = event.target[1].value
         
-          // const response = fetch(BASE_URL,{
-          //   method: "POST",
-          //   headers: {
-          //     'Content-Type': 'application/json'
-          //   },
-          //   body: JSON.stringify({
-          //     user: {
-          //       username: {userName},
-          //       password:  {passWord}
-          //     }
-             
-          //   })
-            
-          // }).then(response => response.json())
-          //   .then(result => {
-          //     console.log(result);
-          //   })
-          //   .catch(console.error);
-           
+          await fetch("https://strangers-things.herokuapp.com/api/2104-UIC-RM-WEB-FT/users/register", {
+            method: "POST",
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              user: {
+                username: `${name}`,
+                password: `${pass}`
+              }
+            })
+          }).then(response => response.json())
+            .then(result => {
+              console.log(result);
+            })
+            .catch(console.error);
+
           }}>
              
         <label  htmlFor="username">Username:</label>
-        <input id="userName" type="text" placeholder="user-name" minLength={4} required/>
+        <input type="text" placeholder="username" minLength={4} required/>
 
         <label htmlFor="password">Password:</label>
-        <input type="password" placeholder="password" minLength={4} required/>
-              
-        {/* <button onClick={() => {
-          // log-in button
-        }}>Log-In</button> */}
-
-
-
-        <button type="submit"
-          
-          
-        >submit</button>
-
+        <input type="password" placeholder="password" minLength={8} required/>
+        
+        <button type="submit">Register</button>
       
+      </form>
 
+      <form id="log-in"  onSubmit={ async (event) => {
+          event.preventDefault()
+          const name = event.target[0].value
+          const pass = event.target[1].value
+        
+          await fetch("https://strangers-things.herokuapp.com/api/2104-UIC-RM-WEB-FT/users/login", {
+            method: "POST",
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              user: {
+                username: `${name}`,
+                password: `${pass}`
+              }
+            })
+          }).then(response => response.json())
+            .then(result => {
+              console.log(result);
+            })
+            .catch(console.error);
+
+          }}>
+             
+        <label  htmlFor="username">Username:</label>
+        <input type="text" placeholder="username" minLength={4} required/>
+
+        <label htmlFor="password">Password:</label>
+        <input type="password" placeholder="password" minLength={8} required/>
+        
+        <button type="submit">Log-in</button>
+      
       </form>
     </> );
 };
