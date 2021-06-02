@@ -1,5 +1,6 @@
 import React, {useState} from "react"
 import './style/Post.css'
+
 const Posts = () => {
     const [posts, setPosts] = useState([]);
     
@@ -15,9 +16,7 @@ const Posts = () => {
     
     return (
         <>
-            <h1>
-                Posts
-            </h1>
+            <h1>Posts</h1>
             {
                 posts.map( (post, idx) => { 
                     return (
@@ -27,8 +26,7 @@ const Posts = () => {
                         </div>);
                 } )
             }   
-        </>
-    )
+        </> );
 };
 
 export default Posts;
