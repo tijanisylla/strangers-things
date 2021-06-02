@@ -4,6 +4,7 @@ const Header = ({loggedIn, setLoggedIn}) => {
     const logOutHandler = async (event) => {
         event.preventDefault()
         localStorage.removeItem("token")
+        localStorage.removeItem("user")
         setLoggedIn(false)
         location.assign("/")
     };
@@ -18,8 +19,8 @@ const Header = ({loggedIn, setLoggedIn}) => {
                     : null
                 }
                 <Link to="/posts">Posts</Link>
-                <Link to="/profile">Profile</Link>
-                <Link to="/" onClick={(event) => {logOutHandler(event)}}>Log Out</Link>
+                {/* <Link to="/profile">Profile</Link> */}
+                { !loggedIn ? <Link to="/" onClick={(event) => {logOutHandler(event)}}>Log Out</Link> : null }
             </div>
         </header> );
 };

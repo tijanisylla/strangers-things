@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { Footer, Form, Header, NewPost, Posts, Profile, Register } from './components';
+import { EditPost, Footer, Form, Header, NewPost, Posts, Profile, Register } from './components';
 
 const App = () => {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -14,9 +14,10 @@ const App = () => {
       
       <main>
         <Switch>
+          <Route path="/edit" component={EditPost} />
           <Route path="/login" render={ () => {return <Form loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>} }/>
           <Route path="/new" render={ (props) => {return <NewPost loggedIn={loggedIn}/>} }/>
-          <Route path="/posts" render={ (props) => {return <Posts posts={posts} setPosts={setPosts}/>} }/>
+          <Route path="/posts" render={ (props) => {return <Posts loggedIn={loggedIn} setLoggedIn={setLoggedIn} posts={posts} setPosts={setPosts}/>} }/>
           <Route path="/profile" component={Profile} />
           <Route path="/register" render={ () => {return <Register loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>} }/>
           <Route path="/" />

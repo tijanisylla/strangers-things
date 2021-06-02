@@ -23,11 +23,12 @@ const Register = ({loggedIn, setLoggedIn}) => {
         console.log(result);
         const token = result.data.token
         localStorage.setItem("token", token)
+        localStorage.setItem("user", name)
       })
       .catch(console.error);
         
     setLoggedIn(true);
-    location.assign("/profile");
+    location.assign("/posts");
   };
 
   return (
