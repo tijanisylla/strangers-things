@@ -1,32 +1,38 @@
 import {Link} from "react-router-dom";
+import baseUrl from "./URL"
 
-const Register = () => {
-    return (
+const Register = ({loggedIn, setLoggedIn}) => {
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const name = event.target[0].value;
+    const pass = event.target[1].value;
+      
+    const response = await fetch(`${baseUrl}/users/register`, {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        user: {
+          username: `${name}`,
+          password: `${pass}`
+        }
+      })
+    }).then(response => response.json())
+      .then(result => {
+        console.log(result);
+        const token = result.data.token
+        localStorage.setItem("token", token)
+      })
+      .catch(console.error);
+        
+    setLoggedIn(true);
+    location.assign("/profile");
+  };
+
+  return (
         <>
-            <form id="register"  onSubmit={ async (event) => {
-                event.preventDefault()
-                const name = event.target[0].value
-                const pass = event.target[1].value
-            
-                await fetch("https://strangers-things.herokuapp.com/api/2104-UIC-RM-WEB-FT/users/register", {
-                  method: "POST",
-                  headers: {
-                    'Content-Type': 'application/json'
-                  },
-                  body: JSON.stringify({
-                    user: {
-                      username: `${name}`,
-                      password: `${pass}`
-                    }
-                  })
-                }).then(response => response.json())
-                  .then(result => {
-                    console.log(result);
-                    const token = result.data.token
-                    localStorage.setItem("token", token)
-                  })
-                  .catch(console.error);
-            }}>
+            <form id="register"  onSubmit={handleSubmit}>
 
               <label  htmlFor="username">Username:</label>
               <input type="text" placeholder="username" minLength={4} required/>

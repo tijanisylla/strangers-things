@@ -1,12 +1,11 @@
 import React, {useState} from "react"
+import baseUrl from "./URL"
 import './style/Post.css'
 
-const Posts = () => {
-    const [posts, setPosts] = useState([]);
-    
+const Posts = ({posts, setPosts}) => {
     useState(() => {
         const fetchPosts = async () => {
-            const response = await fetch("https://strangers-things.herokuapp.com/api/2104-UIC-RM-WEB-FT/posts");
+            const response = await fetch(`${baseUrl}/posts`);
             const result = await response.json();
             console.log(result)
             setPosts(result.data.posts);
@@ -17,6 +16,7 @@ const Posts = () => {
     return (
         <>
             <h1>Posts</h1>
+            <button onClick={() => {location.assign("/new")}}>New Post</button>
             {
                 posts.map( (post, idx) => { 
                     return (

@@ -1,23 +1,24 @@
 import React, {useState} from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { Footer, Form, Header, Posts, Profile, Register } from './components';
+import { Footer, Form, Header, NewPost, Posts, Profile, Register } from './components';
 
- const App = () => {
-  const [loggedIn, setLoggedIn] = useState(false)
-
+const App = () => {
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [posts, setPosts] = useState([]);
 
   return  (
     <Router>
 
-      <Header />
+      <Header loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
       
       <main>
         <Switch>
-          <Route path="/login" render={(props) => {return <Form {...props} loggedIn={loggedIn} setLoggedIn={setLoggedIn}/> }}/>
-          <Route path="/posts" component={Posts} />
+          <Route path="/login" render={ () => {return <Form loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>} }/>
+          <Route path="/new" render={ (props) => {return <NewPost loggedIn={loggedIn}/>} }/>
+          <Route path="/posts" render={ (props) => {return <Posts posts={posts} setPosts={setPosts}/>} }/>
           <Route path="/profile" component={Profile} />
-          <Route path="/register" component={Register} />
+          <Route path="/register" render={ () => {return <Register loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>} }/>
           <Route path="/" />
         </Switch>
       </main>
