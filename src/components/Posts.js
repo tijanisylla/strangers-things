@@ -44,8 +44,8 @@ const Posts = ({posts, setPosts}) => {
                             {post.author.username === localStorage.getItem("user") ? <button onClick={handleEdit}>Edit</button> : null}
                         </div> );
                 })
-            };
-            {makingNew ? <NewPost makingPost={makingPost} setMakingPost={setMakingPost}/> : null}
+            }
+            {/* {makingNew ? <NewPost makingPost={makingPost} setMakingPost={setMakingPost}/> : null} */}
             {isEditing ? <EditPost isEditing={isEditing} setEditing={setEditing} /> : null}
         </> 
     );
