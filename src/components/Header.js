@@ -6,6 +6,7 @@ const Header = () => {
         localStorage.removeItem("token")
         localStorage.removeItem("user")
         location.assign("/")
+        console.log("test")
     };
     
     return (
