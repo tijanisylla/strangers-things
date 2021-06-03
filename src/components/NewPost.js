@@ -1,20 +1,30 @@
-const NewPost = ({loggedIn}) => {
+import baseUrl from "./URL"
+
+const NewPost = () => {
     
     const handleSubmit = async (event) => {
         event.preventDefault()
+        const {target} = event;
 
-        fetch('https://strangers-things.herokuapp.com/api/COHORT-NAME/posts', {
+        const title = target[0].value;
+        const description = target[1].value;
+        const price = target[2].value;
+        const itemLocation = target[3].value;
+        const willDeliverItem = target[4].checked;
+
+        fetch(`${baseUrl}/posts`, {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer TOKEN_STRING_HERE'
+                'Authorization': `Bearer ${localStorage.getItem(user.token)}`
             },
             body: JSON.stringify({
                 post: {
-                    title: "My favorite stuffed animal",
-                    description: "This is a pooh doll from 1973. It has been carefully taken care of since I first got it.",
-                    price: "$480.00",
-                    willDeliver: true
+                    title: `${title}`,
+                    description: `${description}`,
+                    price: `${price}`,
+                    location: itemLocation ? `${itemLocation}` : "[On Request]",
+                    willDeliver: `${willDeliverItem}`
                 }
             })
         }).then(response => response.json())
@@ -24,9 +34,8 @@ const NewPost = ({loggedIn}) => {
             .catch(console.error);
     }
     
-    if (localStorage.getItem("token")) {
-        return (
-            <form >
+    return (
+            <form onSubmit={handleSubmit}>
 
                 <label htmlFor="post-name">Title:</label>
                 <input id="post-name" type="text" placeholder="item for sale" required/>
@@ -37,16 +46,15 @@ const NewPost = ({loggedIn}) => {
                 <label htmlFor="post-cost">Asking Price:</label>
                 <input id="post-cost" type="text" placeholder="$0.00" required />
 
-                <label htmlFor="post-name">Title:</label>
-                <input id="post-loc" type="text" placeholder="item location" required />
+                <label htmlFor="post-loc">Location:</label>
+                <input id="post-loc" type="text" placeholder="item location" />
 
                 <label htmlFor="post-del">Delivery Available:</label>
                 <input id="post-del" type="checkbox"></input>
 
-            </form>)
-    } else {
-        location.assign("/")
-    };
+                <button type="submit">Submit</button>
+
+            </form> );
 };
 
 export default NewPost

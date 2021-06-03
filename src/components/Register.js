@@ -1,36 +1,34 @@
-import {useEffect} from "react"
 import {Link} from "react-router-dom";
 import baseUrl from "./URL"
 
-const Register = ({setLoggedIn}) => {
-
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-        const name = event.target[0].value;
-        const pass = event.target[1].value;
-        
-        const response = await fetch(`${baseUrl}/users/register`, {
-        method: "POST",
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            user: {
-            username: `${name}`,
-            password: `${pass}`
-            }
-        })
-        }).then(response => response.json())
-        .then(result => {
-            console.log(result);
-            const token = result.data.token
-            localStorage.setItem("token", token)
-        })
-        .catch(console.error);
-            
-        setLoggedIn(true);
-        location.assign("/profile");
-    };
+const Register = () => {
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const name = event.target[0].value;
+    const pass = event.target[1].value;
+      
+    const response = await fetch(`${baseUrl}/users/register`, {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        user: {
+          username: `${name}`,
+          password: `${pass}`
+        }
+      })
+    }).then(response => response.json())
+      .then(result => {
+        console.log(result);
+        const token = result.data.token
+        localStorage.setItem("token", token)
+        localStorage.setItem("user", name)
+      })
+      .catch(console.error);
+  
+    location.assign("/posts");
+  };
 
     return (
         <>
