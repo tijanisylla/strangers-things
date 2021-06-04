@@ -2,11 +2,13 @@ import React, {useState} from "react";
 import baseUrl from "./URL";
 import NewPost from "./NewPost";
 import EditPost from "./EditPost";
+import DeletePost from "./DeletePost";
 import './style/Post.css';
 
 const Posts = ({posts, setPosts}) => {
     const [makingPost, setMakingPost] = useState(false);
     const [isEditing, setEditing] = useState(false);
+    const [deleting, setDeleting] = useState(false);
     const [targetId, setTargetId] = useState("")
 
     useState(() => {
@@ -31,6 +33,13 @@ const Posts = ({posts, setPosts}) => {
         setTargetId(thisPostId);
     };
 
+    const handleDelete = async (event) => {
+        event.preventDefault();
+        const thisPostId = event.target.parentElement.id;
+        setTargetId(thisPostId);
+        setDeleting(true);
+    };
+
     return (
         <>  
             <h1>Posts</h1>
@@ -53,11 +62,12 @@ const Posts = ({posts, setPosts}) => {
                                 <p className="post-del">{`${post.willDeliver}`}</p>
                             </div>
                             {post.isAuthor ? <button onClick={handleEdit}>Edit</button> : null}
-                            {post.isAuthor ? <button onClick={handleEdit}>Delete</button> : null}
+                            {post.isAuthor ? <button onClick={handleDelete}>Delete</button> : null}
                         </div> );
                 })
             }
             {isEditing ? <EditPost setEditing={setEditing} targetId={targetId} /> : null}
+            {deleting ? <DeletePost setDeleting={setDeleting} targetId={targetId} /> : null}
         </> );
 };
 

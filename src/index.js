@@ -9,7 +9,7 @@ const App = () => {
   return  (
     <Router>
 
-      <Header/>
+      <Header posts={posts} setPosts={setPosts}/>
       
       <main>
         <Switch>
