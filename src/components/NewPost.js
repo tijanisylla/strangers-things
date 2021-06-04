@@ -1,42 +1,39 @@
 import baseUrl from "./URL"
 
-const NewPost = () => {
-    
+const NewPost = ({setMakingPost}) => {
+
     const handleSubmit = async (event) => {
-        event.preventDefault()
+        event.preventDefault();
+
         const {target} = event;
+        const [ title, description, price, itemLocation, willDeliverItem ] = target;
 
-        const title = target[0].value;
-        const description = target[1].value;
-        const price = target[2].value;
-        const itemLocation = target[3].value;
-        const willDeliverItem = target[4].checked;
-
-        fetch(`${baseUrl}/posts`, {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${localStorage.getItem(user.token)}`
-            },
-            body: JSON.stringify({
-                post: {
-                    title: `${title}`,
-                    description: `${description}`,
-                    price: `${price}`,
-                    location: itemLocation ? `${itemLocation}` : "[On Request]",
-                    willDeliver: `${willDeliverItem}`
-                }
-            })
-        }).then(response => response.json())
-            .then(result => {
-                console.log(result);
-            })
-            .catch(console.error);
-    }
+        try {
+            await fetch(`${baseUrl}/posts`, {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem("token")}`
+                },
+                body: JSON.stringify({
+                    post: {
+                        title: `${title.value}`,
+                        description: `${description.value}`,
+                        price: `${price.value}`,
+                        location: itemLocation ? `${itemLocation.value}` : "[On Request]",
+                        willDeliver: `${willDeliverItem.checked}`
+                    }
+                })
+            });
+        } catch(error) {
+            console.error(error);
+        };
+        setMakingPost(false);
+        location.assign("/posts");
+    };
     
     return (
             <form onSubmit={handleSubmit}>
-
                 <label htmlFor="post-name">Title:</label>
                 <input id="post-name" type="text" placeholder="item for sale" required/>
 
@@ -53,8 +50,8 @@ const NewPost = () => {
                 <input id="post-del" type="checkbox"></input>
 
                 <button type="submit">Submit</button>
-
+                <button onClick={(event) => {event.preventDefault(); setMakingPost(false)}}>Cancel</button>
             </form> );
 };
 
-export default NewPost
+export default NewPost;

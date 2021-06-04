@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import baseUrl from "./URL"
+import baseUrl from "./URL";
 
 const Form = () => {
     async function handleSubmit(event) {

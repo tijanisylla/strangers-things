@@ -7,10 +7,16 @@ import './style/Post.css';
 const Posts = ({posts, setPosts}) => {
     const [makingPost, setMakingPost] = useState(false);
     const [isEditing, setEditing] = useState(false);
+    const [targetId, setTargetId] = useState("")
 
     useState(() => {
         const fetchPosts = async () => {
-            const response = await fetch(`${baseUrl}/posts`);
+            const response = await fetch(`${baseUrl}/posts`,
+                localStorage.getItem("token") ? {
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem("token")}`
+                    }
+                } : null);
             const result = await response.json();
             console.log(result)
             setPosts(result.data.posts);
@@ -18,22 +24,27 @@ const Posts = ({posts, setPosts}) => {
         fetchPosts();
     }, []);
     
-    const handleEdit = async ({target}) => {
+    const handleEdit = async (event) => {
+        event.preventDefault();
+        const thisPostId = event.target.parentElement.id;
         setEditing(true);
-        const thisPost = target.parentNode
-        const [title, body] = thisPost.children
-        const postInfo = thisPost.children[2].children
-        const [price, location, deliver] = postInfo;
+        setTargetId(thisPostId);
     };
 
     return (
         <>  
             <h1>Posts</h1>
-            <button onClick={() => {location.assign("/new")}}>New Post</button>
+            {
+                localStorage.getItem("user") ? 
+                <button onClick={ (event) => {event.preventDefault(); setMakingPost(true)}
+                }>New Post</button>
+                : null
+            }
+            {makingPost ? <NewPost setMakingPost={setMakingPost} /> : null}
             {
                 posts.map((post, idx) => { 
                     return (
-                        <div key={"post"+idx}>
+                        <div id={post._id} key={idx}>
                             <h3 className="post-title">{post.title}</h3>
                             <p className="post-body">{post.description}</p>
                             <div>
@@ -41,14 +52,13 @@ const Posts = ({posts, setPosts}) => {
                                 <p className="post-loc">{post.location}</p>
                                 <p className="post-del">{`${post.willDeliver}`}</p>
                             </div>
-                            {post.author.username === localStorage.getItem("user") ? <button onClick={handleEdit}>Edit</button> : null}
+                            {post.isAuthor ? <button onClick={handleEdit}>Edit</button> : null}
+                            {post.isAuthor ? <button onClick={handleEdit}>Delete</button> : null}
                         </div> );
                 })
             }
-            {/* {makingNew ? <NewPost makingPost={makingPost} setMakingPost={setMakingPost}/> : null} */}
-            {isEditing ? <EditPost isEditing={isEditing} setEditing={setEditing} /> : null}
-        </> 
-    );
+            {isEditing ? <EditPost setEditing={setEditing} targetId={targetId} /> : null}
+        </> );
 };
 
 export default Posts;

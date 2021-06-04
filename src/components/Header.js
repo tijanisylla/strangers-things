@@ -1,17 +1,16 @@
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 
 const Header = () => {
     function logOutHandler(event) {
-        event.preventDefault()
-        localStorage.removeItem("token")
-        localStorage.removeItem("user")
-        location.assign("/")
-        console.log("test")
+        event.preventDefault();
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+        location.assign("/");
     };
     
     return (
         <header>
-            <h1>Stranger's Things</h1>
+            <h1>Strangers' Things</h1>
             <div id="nav">
                 {   
                     !localStorage.getItem("user") ? 
@@ -19,7 +18,6 @@ const Header = () => {
                     : null
                 }
                 <Link to="/posts">Posts</Link>
-                {/* <Link to="/profile">Profile</Link> */}
                 {   
                     localStorage.getItem("user") ? 
                     <Link to="/" onClick={(event) => {logOutHandler(event)}}>Log Out</Link> 
