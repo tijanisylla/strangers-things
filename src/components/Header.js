@@ -4,10 +4,7 @@ import baseUrl from "./URL";
 import './style/Style.css'
 
 
-const Header = ({posts, setPosts}) => {
-
-    const [searchTerm, setSearchTerm] = useState("");
-
+const Header = () => {
     function logOutHandler(event) {
         event.preventDefault();
         localStorage.removeItem("token");
