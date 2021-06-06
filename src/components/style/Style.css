@@ -185,8 +185,9 @@ footer {
     bottom: 0;
     width: 100%;
     text-align: center;
-    padding: 10px;
-    background-color: #000;
+    background: rgba(0, 0, 0, 0.379);
+    color: white;
+    margin: 0px;
 }
 
 
