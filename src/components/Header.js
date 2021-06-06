@@ -27,7 +27,7 @@ const Header = () => {
                 }
                 {   
                     localStorage.getItem("user") ? 
-                    <Link to="/" onClick={(event) => {logOutHandler(event)}}>Log Out</Link> 
+                    <Link to="/" onClick={(event) => {logOutHandler(event)}}>Log Out {localStorage.getItem("user")}</Link> 
                     : null
                 }
             </div>

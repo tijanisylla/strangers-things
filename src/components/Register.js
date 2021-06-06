@@ -33,37 +33,21 @@ const Register = () => {
         location.assign("/posts");
     };
 
-  
     return (
         <>
             <form id="register"  onSubmit={handleSubmit}>
+                <h3>Registration</h3>
 
                 <label  htmlFor="username">Username:</label>
                 <input type="text" placeholder="username" minLength={4} required/>
                 
-                <label htmlFor="email">Enter your email:</label>
-                
-                <input type="email" id="email" placeholder="Enter your email" name="email" required/>
-                
-                
-                
-            
                 <label htmlFor="password">Password:</label>
                 <input type="password" placeholder="password" minLength={8} required/>
-
-                <label  htmlFor="password2">confirm-password</label>
-                <input type="password" placeholder="confirm-password" minLength={4} required/>
             
-               <button id="btn-register" type="submit">Register</button>
+                <button id="btn-register" type="submit">Register</button>
 
-               <p>Back to <Link id="lgn" to="/login">Log-In</Link></p>
-
-
-               
-            </form>
-            
-
-            
+                <p>Back to <Link id="lgn" to="/login">Log-In</Link></p>
+            </form> 
         </> );
 };
 

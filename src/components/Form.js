@@ -39,16 +39,14 @@ const Form = () => {
         <>
         
             <form id="log-in" onSubmit={handleSubmit}>
+                <h3>Log-In</h3>
                         
                 <label  htmlFor="username">Username:</label>
                 <input type="text" placeholder="username" minLength={4} required/>
                     
                 <label htmlFor="password">Password:</label>
                 <input type="password" placeholder="password" minLength={8} required/>
-
-            
-
-                    
+                
                 <button id ="btn-login" type="submit">Log-in</button>
                 <p>Don't have an account? <Link id="sign-up" to="/register">Sign up!</Link></p>
                     

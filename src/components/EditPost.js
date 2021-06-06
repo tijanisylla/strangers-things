@@ -65,35 +65,37 @@ const EditPost = ({setEditing, targetId}) => {
     };
     
     return (
-        <form onSubmit={handleSubmit}>
-            <label htmlFor="post-name">Title:</label>
-            <input id="edit-post-name" type="text" placeholder="item for sale" 
-                value={ti} onChange={ (event) => {setTitle(event.target.value)}
-            }/>
+        <div id="edit-post">
+            <form onSubmit={handleSubmit}>
+                <label htmlFor="post-name">Title:</label>
+                <input id="edit-post-name" type="text" placeholder="item for sale" 
+                    value={ti} onChange={ (event) => {setTitle(event.target.value)}
+                }/>
 
-            <label htmlFor="post-body">Body:</label>
-            <input id="post-body" type="text" placeholder="item description" 
-                value={bo} onChange={ (event) => {setBody(event.target.value)}
-            }/>
+                <label htmlFor="post-body">Body:</label>
+                <input id="post-body" type="text" placeholder="item description" 
+                    value={bo} onChange={ (event) => {setBody(event.target.value)}
+                }/>
 
-            <label htmlFor="post-cost">Asking Price:</label>
-            <input id="post-cost" type="text" placeholder="$0.00" 
-                value={pr} onChange={ (event) => {setPrice(event.target.value)}
-            }/>
+                <label htmlFor="post-cost">Asking Price:</label>
+                <input id="post-cost" type="text" placeholder="$0.00" 
+                    value={pr} onChange={ (event) => {setPrice(event.target.value)}
+                }/>
 
-            <label htmlFor="post-loc">Location:</label>
-            <input id="post-loc" type="text" placeholder="item location" 
-                value={loc} onChange={ (event) => {setLocation(event.target.value)}
-            }/>
+                <label htmlFor="post-loc">Location:</label>
+                <input id="post-loc" type="text" placeholder="item location" 
+                    value={loc} onChange={ (event) => {setLocation(event.target.value)}
+                }/>
 
-            <label htmlFor="post-del">Delivery Available:</label>
-            <input id="post-del" type="checkbox" 
-                checked={del} onChange={ (event) => {setWillDeliver(event.target.checked)}
-            }/>
+                <label htmlFor="post-del">Delivery Available:</label>
+                <input id="post-del" type="checkbox" 
+                    checked={del} onChange={ (event) => {setWillDeliver(event.target.checked)}
+                }/>
 
-            <button id="btn-submit" type="submit">Submit</button>
-            <button id="btn-cancel" onClick={(event) => {event.preventDefault(); setEditing(false)}}>Cancel</button>
-        </form> );
+                <button id="btn-submit" type="submit">Submit</button>
+                <button id="btn-cancel" onClick={(event) => {event.preventDefault(); setEditing(false)}}>Cancel</button>
+            </form>
+        </div> );
 };
 
 export default EditPost;

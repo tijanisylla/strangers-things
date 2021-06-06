@@ -24,11 +24,13 @@ const DeletePost = ({setDeleting, targetId}) => {
     };
     
     return (
-        <form onSubmit={handleDelete}>
-            <p>Really Delete?</p>
-            <button type="submit" >Confirm</button>
-            <button onClick={ (event) => {event.preventDefault(); setDeleting(false)}}>Cancel</button>
-        </form> );
+        <div id="delete-post">
+            <form onSubmit={handleDelete}>
+                <p>Really Delete?</p>
+                <button type="submit" >Confirm</button>
+                <button onClick={ (event) => {event.preventDefault(); setDeleting(false)}}>Cancel</button>
+            </form>
+        </div> );
 };
 
 export default DeletePost;
