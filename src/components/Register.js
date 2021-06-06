@@ -1,11 +1,14 @@
 import {Link} from "react-router-dom";
 import baseUrl from "./URL"
+import './style/Style.css'
 
 const Register = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         const name = event.target[0].value;
         const pass = event.target[1].value;
+
+    
         
         const response = await fetch(`${baseUrl}/users/register`, {
         method: "POST",
@@ -30,18 +33,37 @@ const Register = () => {
         location.assign("/posts");
     };
 
+  
     return (
         <>
             <form id="register"  onSubmit={handleSubmit}>
+
                 <label  htmlFor="username">Username:</label>
                 <input type="text" placeholder="username" minLength={4} required/>
+                
+                <label htmlFor="email">Enter your email:</label>
+                
+                <input type="email" id="email" placeholder="Enter your email" name="email" required/>
+                
+                
+                
             
                 <label htmlFor="password">Password:</label>
                 <input type="password" placeholder="password" minLength={8} required/>
+
+                <label  htmlFor="password2">confirm-password</label>
+                <input type="password" placeholder="confirm-password" minLength={4} required/>
             
-               <button type="submit">Register</button>
+               <button id="btn-register" type="submit">Register</button>
+
+               <p>Back to <Link id="lgn" to="/login">Log-In</Link></p>
+
+
+               
             </form>
-            <p>Back to <Link to="/login">Log-In</Link></p>
+            
+
+            
         </> );
 };
 

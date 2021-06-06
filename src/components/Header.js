@@ -1,6 +1,7 @@
 import {useState} from "react";
 import { Link } from "react-router-dom";
 import baseUrl from "./URL";
+import './style/Style.css'
 
 
 const Header = ({posts, setPosts}) => {
@@ -51,7 +52,7 @@ const Header = ({posts, setPosts}) => {
     } 
 
     return (
-        <header>
+        <header id="page-hd">
             <h1>Strangers' Things</h1>
             <div id="nav">
                 {   
@@ -66,11 +67,11 @@ const Header = ({posts, setPosts}) => {
                     : null
                 }
             </div>
-            <form id="search-bar" onSubmit={ (event) => {handleSearch(event); console.log(searchTerm)} }>
+            {/* <form id="search-bar" onSubmit={ (event) => {handleSearch(event); console.log(searchTerm)} }>
                 <label htmlFor="search-term">Search: </label>
                 <input name="search-term" type="text" placeholder="search"/>
                 <button type="submit" >Submit</button>
-            </form>
+            </form> */}
         </header> );
 };
 

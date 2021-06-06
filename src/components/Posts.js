@@ -3,9 +3,10 @@ import baseUrl from "./URL";
 import NewPost from "./NewPost";
 import EditPost from "./EditPost";
 import DeletePost from "./DeletePost";
-import './style/Post.css';
+import './style/Style.css';
 
 const Posts = ({posts, setPosts}) => {
+   
     const [makingPost, setMakingPost] = useState(false);
     const [isEditing, setEditing] = useState(false);
     const [deleting, setDeleting] = useState(false);
@@ -42,7 +43,9 @@ const Posts = ({posts, setPosts}) => {
 
     return (
         <>  
-            <h1>Posts</h1>
+        <header id="post-hd">
+            <h1>Buy Faster Sell Faster !</h1>
+            </header>
             {
                 localStorage.getItem("user") ? 
                 <button onClick={ (event) => {event.preventDefault(); setMakingPost(true)}
@@ -53,12 +56,16 @@ const Posts = ({posts, setPosts}) => {
             {
                 posts.map((post, idx) => { 
                     return (
-                        <div id={post._id} key={idx}>
+                        <div className="post-item" id={post._id} key={idx}>
+                            <div className="card">
                             <h3 className="post-title">{post.title}</h3>
                             <p className="post-body">{post.description}</p>
-                            <div>
-                                <p className="post-price">{post.price}</p>
-                                <p className="post-loc">{post.location}</p>
+                            </div>
+                            <div className="post-info"> 
+                                <p className="post-price">Price:{post.price}</p>
+                                <p className="post-loc">
+                                    <img id="location" src="https://i.pinimg.com/474x/cb/17/c6/cb17c606f41f47aa505e6d203df8716d.jpg"/>
+                                    {post.location}</p>
                                 <p className="post-del">{`${post.willDeliver}`}</p>
                             </div>
                             {post.isAuthor ? <button onClick={handleEdit}>Edit</button> : null}
@@ -68,7 +75,11 @@ const Posts = ({posts, setPosts}) => {
             }
             {isEditing ? <EditPost setEditing={setEditing} targetId={targetId} /> : null}
             {deleting ? <DeletePost setDeleting={setDeleting} targetId={targetId} /> : null}
-        </> );
+
+           
+        </> 
+        );
+        
 };
 
 export default Posts;

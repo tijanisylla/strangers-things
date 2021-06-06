@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import baseUrl from "./URL";
+import './style/Style.css'
 
 const Form = () => {
     async function handleSubmit(event) {
@@ -36,6 +37,7 @@ const Form = () => {
     
     return (
         <>
+        
             <form id="log-in" onSubmit={handleSubmit}>
                         
                 <label  htmlFor="username">Username:</label>
@@ -43,11 +45,16 @@ const Form = () => {
                     
                 <label htmlFor="password">Password:</label>
                 <input type="password" placeholder="password" minLength={8} required/>
+
+            
+
                     
-                <button type="submit">Log-in</button>
+                <button id ="btn-login" type="submit">Log-in</button>
+                <p>Don't have an account? <Link id="sign-up" to="/register">Sign up!</Link></p>
                     
             </form>
-            <p>Don't have an account? <Link to="/register">Sign up!</Link></p>
+          
+           
         </> );
 };
 

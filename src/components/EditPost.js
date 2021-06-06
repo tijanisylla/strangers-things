@@ -1,5 +1,6 @@
 import { useState } from "react"
 import baseUrl from "./URL"
+import './style/Style.css'
 
 const EditPost = ({setEditing, targetId}) => {
     // States for the post targeted by the edit button
@@ -90,8 +91,8 @@ const EditPost = ({setEditing, targetId}) => {
                 checked={del} onChange={ (event) => {setWillDeliver(event.target.checked)}
             }/>
 
-            <button type="submit">Submit</button>
-            <button onClick={(event) => {event.preventDefault(); setEditing(false)}}>Cancel</button>
+            <button id="btn-submit" type="submit">Submit</button>
+            <button id="btn-cancel" onClick={(event) => {event.preventDefault(); setEditing(false)}}>Cancel</button>
         </form> );
 };
 
