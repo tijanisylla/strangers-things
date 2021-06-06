@@ -24,8 +24,10 @@ const Posts = ({posts, setPosts}) => {
             console.log(result)
             setPosts(result.data.posts);
         };
+
         fetchPosts();
     }, []);
+
     
     const handleEdit = async (event) => {
         event.preventDefault();

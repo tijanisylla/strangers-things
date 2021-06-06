@@ -28,7 +28,7 @@ const Header = ({posts, setPosts}) => {
             const result = await response.json();
             const foundPosts = result.data.posts
             const searchPosts = foundPosts.filter((post) => {
-                if(post.title.includes(searchTerm)|| post.description.includes(searchTerm) || post.location.includes(searchTerm)) {
+                if(post.title.includes(searchTerm)|| post.description.includes(searchTerm) || post.includes(searchTerm)) {
                     return  post
                 }const fetchPosts = async () => {
                     const response = await fetch(`${baseUrl}/posts`,
@@ -67,11 +67,11 @@ const Header = ({posts, setPosts}) => {
                     : null
                 }
             </div>
-            {/* <form id="search-bar" onSubmit={ (event) => {handleSearch(event); console.log(searchTerm)} }>
+            <form id="search-bar" onSubmit={ (event) => {handleSearch();} }>
                 <label htmlFor="search-term">Search: </label>
                 <input name="search-term" type="text" placeholder="search"/>
-                <button type="submit" >Submit</button>
-            </form> */}
+                <button type="submit" >Search</button>
+            </form>
         </header> );
 };
 
