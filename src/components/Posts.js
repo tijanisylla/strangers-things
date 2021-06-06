@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import baseUrl from "./URL";
 import NewPost from "./NewPost";
 import EditPost from "./EditPost";
@@ -6,27 +6,26 @@ import DeletePost from "./DeletePost";
 import './style/Style.css';
 import { render } from "react-dom";
 
-const Posts = ({posts, setPosts, searchTerm, setSearchTerm}) => {
+const Posts = ({posts, setPosts}) => {
    
     const [makingPost, setMakingPost] = useState(false);
     const [isEditing, setEditing] = useState(false);
     const [deleting, setDeleting] = useState(false);
     const [targetId, setTargetId] = useState("");
 
-    useState(() => {
-        const fetchPosts = async () => {
-            const response = await fetch(`${baseUrl}/posts`,
-                localStorage.getItem("token") ? {
-                    headers: {
-                        'Authorization': `Bearer ${localStorage.getItem("token")}`
-                    }
-                } : null);
-            const result = await response.json();
-            console.log(result)
-            setPosts(result.data.posts);
-        };
+    const fetchPosts = async () => {
+        const response = await fetch(`${baseUrl}/posts`,
+            localStorage.getItem("token") ? {
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem("token")}`
+                }
+            } : null);
+        const result = await response.json();
+        return result.data.posts;
+    };
 
-        fetchPosts();
+    useState(() => {
+        fetchPosts().then((posts) => {setPosts(posts)});
     }, []);
 
     
@@ -45,34 +44,14 @@ const Posts = ({posts, setPosts, searchTerm, setSearchTerm}) => {
     };
 
     const handleSearch = async (event) => {
-        event.preventDefault()
-        const searchText = event.target[0].value
-        const searchPosts = async () => {
-            try {
-                const response = await fetch(`${baseUrl}/posts`,
-                    localStorage.getItem("token") ? {
-                        headers: {
-                            'Authorization': `Bearer ${localStorage.getItem("token")}`
-                        }
-                    } : null);
-                const result = await response.json();
-                console.log(result)
-                setPosts(result.data.posts)
-            } catch (error) {
-                console.error(error)
-            }
-            const filteredPosts = posts.filter( (post) => {
-                if (post.title.includes(`${searchText}`) || post.description.includes(`${searchText}`)) {
-                
-                    return (
-                        
-                    {post}
-                    )
-                }
-            })
-            setPosts(filteredPosts)
-        }
-        searchPosts()
+        event.preventDefault();
+        const searchText = event.target[0].value;
+        fetchPosts().then((result) => {
+            const filteredPosts = result.filter( (post) => {
+                return post.title.toLowerCase().includes(`${searchText}`) || post.description.toLowerCase().includes(`${searchText}`)
+            });
+            setPosts(filteredPosts);
+        });
     };
 
 
@@ -82,7 +61,7 @@ const Posts = ({posts, setPosts, searchTerm, setSearchTerm}) => {
                 <h1>Buy Faster Sell Faster !</h1>
             </header>
             
-            <form id="search-bar" onSubmit={ (event) => {handleSearch(event); console.log(searchTerm)} }>
+            <form id="search-bar" onSubmit={handleSearch}>
                 <label htmlFor="search-term">Search: </label>
                 <input name="search-term" type="text" placeholder="search"/>
                 <button type="submit" >Submit</button>
