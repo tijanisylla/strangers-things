@@ -1,6 +1,4 @@
-import {useState} from "react";
 import { Link } from "react-router-dom";
-import baseUrl from "./URL";
 import './style/Style.css'
 
 
@@ -22,6 +20,11 @@ const Header = () => {
                     : null
                 }
                 <Link to="/posts">Posts</Link>
+                {   
+                    localStorage.getItem("user") ? 
+                    <Link to="/profile">Profile</Link> 
+                    : null
+                }
                 {   
                     localStorage.getItem("user") ? 
                     <Link to="/" onClick={(event) => {logOutHandler(event)}}>Log Out</Link> 
