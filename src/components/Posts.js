@@ -43,7 +43,7 @@ const Posts = ({posts, setPosts}) => {
 
     const handleSearch = async (event) => {
         event.preventDefault();
-        const searchText = event.target[0].value;
+        const searchText = event.target[0].value.toLowerCase();
         fetchPosts().then((result) => {
             const filteredPosts = result.filter( (post) => {
                 return post.title.toLowerCase().includes(`${searchText}`) || post.description.toLowerCase().includes(`${searchText}`)
