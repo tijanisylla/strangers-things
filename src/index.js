@@ -5,6 +5,7 @@ import { EditPost, Footer, Form, Header, Posts, Profile, Register } from './comp
 
 const App = () => {
   const [posts, setPosts] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
 
   return  (
     <Router>
@@ -13,11 +14,12 @@ const App = () => {
       
       <main>
         <Switch>
-          <Route path="/login" component={Form} />
-          <Route path="/posts" render={ () => {return <Posts posts={posts} setPosts={setPosts}/>} }/>
+          <Route path="/posts" render={ () => {
+            return <Posts posts={posts} setPosts={setPosts}
+                          searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>} }/>
           <Route path="/profile" component={Profile} />
           <Route path="/register" component={Register} />
-          <Route path="/" />
+          <Route path="/" component={Form} />
         </Switch>
       </main>
 

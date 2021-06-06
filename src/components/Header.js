@@ -14,42 +14,6 @@ const Header = ({posts, setPosts}) => {
         localStorage.removeItem("user");
         location.assign("/");
     };
-    
-    const handleSearch = async (event) => {
-        event.preventDefault()
-        setSearchTerm(event.target[0].value)
-        try {
-            const response = await fetch(`${baseUrl}/posts`,
-                localStorage.getItem("token") ? {
-                    headers: {
-                        'Authorization': `Bearer ${localStorage.getItem("token")}`
-                    }
-                } : null);
-            const result = await response.json();
-            const foundPosts = result.data.posts
-            const searchPosts = foundPosts.filter((post) => {
-                if(post.title.includes(searchTerm)|| post.description.includes(searchTerm) || post.includes(searchTerm)) {
-                    return  post
-                }const fetchPosts = async () => {
-                    const response = await fetch(`${baseUrl}/posts`,
-                        localStorage.getItem("token") ? {
-                            headers: {
-                                'Authorization': `Bearer ${localStorage.getItem("token")}`
-                            }
-                        } : null);
-                    const result = await response.json();
-                    console.log(result)
-                    setPosts(result.data.posts);
-                };
-                fetchPosts();
-            })
-
-            setPosts(searchPosts);
-        } catch (error) {
-            console.error(error)
-        }
-        console.log(posts)
-    } 
 
     return (
         <header id="page-hd">
@@ -67,11 +31,6 @@ const Header = ({posts, setPosts}) => {
                     : null
                 }
             </div>
-            <form id="search-bar" onSubmit={ (event) => {handleSearch();} }>
-                <label htmlFor="search-term">Search: </label>
-                <input name="search-term" type="text" placeholder="search"/>
-                <button type="submit" >Search</button>
-            </form>
         </header> );
 };
 
