@@ -1,6 +1,8 @@
+import { useHistory } from "react-router-dom"
 import baseUrl from "./URL"
 
 const DeletePost = ({setDeleting, targetId}) => {
+    let history = useHistory();
     
     const handleDelete = async (event) => {
         event.preventDefault();
@@ -20,15 +22,18 @@ const DeletePost = ({setDeleting, targetId}) => {
         };
         
         setDeleting(false);
-        location.assign("/posts");
+        history.push("/posts");
+        window.location.reload();
     };
     
     return (
-        <form onSubmit={handleDelete}>
-            <p>Really Delete?</p>
-            <button type="submit" >Confirm</button>
-            <button onClick={ (event) => {event.preventDefault(); setDeleting(false)}}>Cancel</button>
-        </form> );
+        <div id="delete-post">
+            <form onSubmit={handleDelete}>
+                <p>Really Delete?</p>
+                <button type="submit" >Confirm</button>
+                <button onClick={ (event) => {event.preventDefault(); setDeleting(false)}}>Cancel</button>
+            </form>
+        </div> );
 };
 
 export default DeletePost;

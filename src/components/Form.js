@@ -1,9 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import baseUrl from "./URL";
 import './style/Style.css'
 
 const Form = () => {
+
+    let history = useHistory()
     async function handleSubmit(event) {
         event.preventDefault();
 
@@ -31,24 +33,21 @@ const Form = () => {
         } catch (error) {
         console.error(error);
         };
-
-        location.assign("/posts");
+        history.push("/posts");
     };
     
     return (
         <>
         
             <form id="log-in" onSubmit={handleSubmit}>
+                <h3>Log-In</h3>
                         
                 <label  htmlFor="username">Username:</label>
                 <input type="text" placeholder="username" minLength={4} required/>
                     
                 <label htmlFor="password">Password:</label>
                 <input type="password" placeholder="password" minLength={8} required/>
-
-            
-
-                    
+                
                 <button id ="btn-login" type="submit">Log-in</button>
                 <p>Don't have an account? <Link id="sign-up" to="/register">Sign up!</Link></p>
                     

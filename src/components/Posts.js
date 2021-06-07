@@ -86,7 +86,7 @@ const Posts = ({posts, setPosts}) => {
                                 <p className="post-loc">
                                     <img id="location" src="https://i.pinimg.com/474x/cb/17/c6/cb17c606f41f47aa505e6d203df8716d.jpg"/>
                                     {post.location}</p>
-                                <p className="post-del">{`${post.willDeliver}`}</p>
+                                {post.willDeliver ? <p className="post-del">Delivery Available</p> : null}
                             </div>
                             {post.isAuthor ? <button onClick={handleEdit}>Edit</button> : null}
                             {post.isAuthor ? <button onClick={handleDelete}>Delete</button> : null}

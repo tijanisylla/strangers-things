@@ -1,13 +1,15 @@
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import './style/Style.css'
 
 
 const Header = () => {
+    let history = useHistory()
     function logOutHandler(event) {
         event.preventDefault();
         localStorage.removeItem("token");
         localStorage.removeItem("user");
-        location.assign("/");
+        history.push("/");
+        window.location.reload();
     };
 
     return (
@@ -27,7 +29,7 @@ const Header = () => {
                 }
                 {   
                     localStorage.getItem("user") ? 
-                    <Link to="/" onClick={(event) => {logOutHandler(event)}}>Log Out</Link> 
+                    <Link to="/" onClick={(event) => {logOutHandler(event)}}>Log Out {localStorage.getItem("user")}</Link> 
                     : null
                 }
             </div>

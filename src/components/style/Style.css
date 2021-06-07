@@ -185,8 +185,9 @@ footer {
     bottom: 0;
     width: 100%;
     text-align: center;
-    padding: 10px;
-    background-color: #000;
+    background: rgba(0, 0, 0, 0.379);
+    color: white;
+    margin: 0px;
 }
 
 
@@ -198,7 +199,34 @@ footer {
     background: red;
 }
 
+#edit-post,
+#delete-post,
+#new-post {
+  position: fixed;
 
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  
+  backdrop-filter: blur(3px);
+  background: 0,0,0,0.4;
+}
+
+#edit-post form,
+#delete-post form,
+#new-post form {
+    min-width: 480px;
+    padding: 3rem;
+  
+    box-shadow: 0 2px 8px black;
+    background: white;
+  
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 
 
 
