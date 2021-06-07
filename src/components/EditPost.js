@@ -1,8 +1,10 @@
 import { useState } from "react"
+import {useHistory} from "react-router-dom"
 import baseUrl from "./URL"
 import './style/Style.css'
 
 const EditPost = ({setEditing, targetId}) => {
+    let history = useHistory();
     // States for the post targeted by the edit button
     const [ti, setTitle] = useState("")
     const [bo, setBody] = useState("")
@@ -61,7 +63,8 @@ const EditPost = ({setEditing, targetId}) => {
         };
         
         setEditing(false);
-        location.assign("/posts");
+        history.push("/posts");
+        window.location.reload();
     };
     
     return (

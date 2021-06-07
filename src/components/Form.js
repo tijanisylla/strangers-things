@@ -1,9 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import baseUrl from "./URL";
 import './style/Style.css'
 
 const Form = () => {
+
+    let history = useHistory()
     async function handleSubmit(event) {
         event.preventDefault();
 
@@ -31,8 +33,7 @@ const Form = () => {
         } catch (error) {
         console.error(error);
         };
-
-        location.assign("/posts");
+        history.push("/posts");
     };
     
     return (

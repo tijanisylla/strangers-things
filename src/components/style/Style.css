@@ -200,7 +200,8 @@ footer {
 }
 
 #edit-post,
-#delete-post {
+#delete-post,
+#new-post {
   position: fixed;
 
   top: 0;
@@ -213,7 +214,8 @@ footer {
 }
 
 #edit-post form,
-#delete-post form {
+#delete-post form,
+#new-post form {
     min-width: 480px;
     padding: 3rem;
   

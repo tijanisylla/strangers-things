@@ -1,6 +1,8 @@
+import { useHistory } from "react-router-dom"
 import baseUrl from "./URL"
 
 const NewPost = ({setMakingPost}) => {
+    let history = useHistory()
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -29,10 +31,12 @@ const NewPost = ({setMakingPost}) => {
             console.error(error);
         };
         setMakingPost(false);
-        location.assign("/posts");
+        history.push("/posts")
+        window.location.reload();
     };
     
     return (
+        <div id="new-post">
             <form onSubmit={handleSubmit}>
                 <label htmlFor="post-name">Title:</label>
                 <input id="post-name" type="text" placeholder="item for sale" required/>
@@ -51,7 +55,8 @@ const NewPost = ({setMakingPost}) => {
 
                 <button type="submit">Submit</button>
                 <button onClick={(event) => {event.preventDefault(); setMakingPost(false)}}>Cancel</button>
-            </form> );
+            </form>
+        </div> );
 };
 
 export default NewPost;

@@ -1,13 +1,15 @@
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import './style/Style.css'
 
 
 const Header = () => {
+    let history = useHistory()
     function logOutHandler(event) {
         event.preventDefault();
         localStorage.removeItem("token");
         localStorage.removeItem("user");
-        location.assign("/");
+        history.push("/");
+        window.location.reload();
     };
 
     return (

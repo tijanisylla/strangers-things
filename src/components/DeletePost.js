@@ -1,6 +1,8 @@
+import { useHistory } from "react-router-dom"
 import baseUrl from "./URL"
 
 const DeletePost = ({setDeleting, targetId}) => {
+    let history = useHistory();
     
     const handleDelete = async (event) => {
         event.preventDefault();
@@ -20,7 +22,8 @@ const DeletePost = ({setDeleting, targetId}) => {
         };
         
         setDeleting(false);
-        location.assign("/posts");
+        history.push("/posts");
+        window.location.reload();
     };
     
     return (
